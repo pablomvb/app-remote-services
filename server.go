@@ -6,6 +6,8 @@ import (
 	"net/http"
 	"path"
 	"time"
+
+	"github.com/pablomvb/app-remote-services/api"
 )
 
 const version = "0.0.1"
@@ -55,7 +57,7 @@ func main() {
 	var server http.Server
 	signalStopServer := make(chan bool)
 
-	http.HandleFunc("/api/v1/ls", api.ls)
+	http.HandleFunc("/api/v1/ls", api.List)
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")

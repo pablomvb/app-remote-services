@@ -55,6 +55,8 @@ func main() {
 	var server http.Server
 	signalStopServer := make(chan bool)
 
+	http.HandleFunc("/api/v1/ls", api.ls)
+
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusNotFound)

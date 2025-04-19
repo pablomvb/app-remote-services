@@ -8,6 +8,8 @@ import (
 	"time"
 )
 
+const version = "0.0.1"
+
 type CommandDetail struct {
 	name string
 	path string
@@ -46,7 +48,7 @@ func serviceStopServer(server *http.Server, signalOff chan bool) {
 }
 
 func main() {
-
+	log.Println("API Server v", version)
 	initCommands()
 	log.Println("Initializing server...")
 

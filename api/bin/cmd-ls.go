@@ -6,7 +6,7 @@ import (
 	"os"
 )
 
-func ls(w http.ResponseWriter, r *http.Request) {
+func main(w http.ResponseWriter, r *http.Request) {
 	// get path from query request
 	strPath := r.URL.Query().Get("path")
 

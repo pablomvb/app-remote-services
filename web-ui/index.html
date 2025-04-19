@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Preact App</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" 
+        integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <script src="utils.js"></script>
+</head>
+<body>
+    <div id="menu-bar" class="header">
+        <div class="home-menu pure-menu pure-menu-horizontal">
+            <!--a class="pure-menu-heading" href="">Your Site</a-->
+            <nav class="pure-menu-list">
+                <li class="pure-menu-item pure-menu-selected"><a href="javascript:showWindow('apps')" class="pure-menu-link">apps</a></li>
+                <li class="pure-menu-item"><a href="javascript:showWindow('jobs')" class="pure-menu-link">jobs</a></li>
+            </nav>
+        </div>
+    </div>
+    <div id="app">
+        <div id="window"></div>
+    </div>
+    <script type="module">
+        import { html, Component, render } from 'https://esm.sh/htm/preact/standalone';
+
+        function App2(props) {
+            return html`
+                <div class="pure-g">
+                    <div class="pure-u-1">
+                        <h1>Hello, Preact!</h1>
+                        <p>Welcome to your Preact app styled with Pure CSS.</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        function showWindow(name) {
+            const app = document.getElementById('app');
+            const windowDiv = document.getElementById('window');
+            windowDiv.innerHTML = '';
+            if (name === 'apps') {
+                render(html`<${App} page="Apps" />`, windowDiv);
+            } else if (name === 'jobs') {
+                render(html`<${App2} />`, windowDiv);
+            }
+        }
+
+        class App extends Component {
+            addTodo() {
+                const { todos = [] } = this.state;
+                this.setState({ todos: todos.concat(`Item ${todos.length}`) });
+            }
+            render({ page }, { todos = [] }) {
+                return html`
+                <div class="app">
+                    <${Header} name="ToDo's (${page})" />
+                    <button onClick=${() => this.addTodo()}>Add Todo</button>
+                    <ul>
+                    ${todos.map(todo => html`
+                        <li key=${todo}>${todo}</li>
+                    `)}
+                    </ul>
+                    <${Footer}>footer content here<//>
+                </div>
+                `;
+            }
+        }
+
+        const Header = ({ name }) => html`<h1>${name} List</h1>`
+        const Footer = props => html`<footer ...${props} />`
+        render(html`<${App} page="All" />`, document.getElementById('window'));
+        
+    </script>
+    <script>
+        function showWindow(name) {
+            const app = document.getElementById('app');
+            const windowDiv = document.getElementById('window');
+            windowDiv.innerHTML = '';
+            if (name === 'apps') {
+                render(html`<${App} page="Apps" />`, windowDiv);
+            } else if (name === 'jobs') {
+                render(html`<${App2} />`, windowDiv);
+            }
+        }
+
+
+    </script>
+</body>
+</html>

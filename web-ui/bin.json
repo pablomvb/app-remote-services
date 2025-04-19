@@ -1,0 +1,12 @@
+[
+    {
+        "name": "dvd-rip",
+        "description": "DVD ripper tool",
+        "js-bin": "/bin/dvd-rip.js"
+    },
+    {
+        "name": "dvd-2-iso",
+        "description": "DVD to ISO converter",
+        "js-bin": "/bin/dvd-2-iso.js"
+    }
+]
